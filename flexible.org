@@ -1,0 +1,65 @@
+
+* filename
+src_python[:session Python]{Model = sw.ActiveDoc;Model.GetPathName} {{{results(=C:\Users\30698\Desktop\container\flexible-connector.SLDPRT=)}}}
+
+#+tblname: flexible_filename
+| C:\\Users\\30698\\Desktop\\container\\flexible-connector.SLDPRT |
+
+
+* Dimension drawing
+#+tblname: flexible_dimensions
+|   Da |   L |   s | configuration_name |
+|------+-----+-----+--------------------|
+|   75 |  90 | 2.0 |              75-90 |
+|   90 |  90 | 2.0 |              90-90 |
+|  110 |  90 | 2.0 |             110-90 |
+|  125 |  90 | 2.0 |             125-90 |
+|  140 | 150 | 2.0 |            140-150 |
+|  160 | 150 | 2.0 |            160-150 |
+|  180 | 150 | 2.0 |            180-150 |
+|  200 | 150 | 2.0 |            200-150 |
+|  225 | 150 | 2.0 |            225-150 |
+|  250 | 150 | 2.0 |            250-150 |
+|  280 | 150 | 2.0 |            280-150 |
+|  315 | 150 | 2.0 |            315-150 |
+|  355 | 150 | 2.0 |            355-150 |
+|  400 | 150 | 2.0 |            400-150 |
+|  450 | 150 | 2.0 |            450-150 |
+|  500 | 150 | 2.0 |            500-150 |
+|  560 | 150 | 2.0 |            560-150 |
+|  600 | 150 | 2.0 |            600-150 |
+|  630 | 150 | 2.0 |            630-150 |
+|  700 | 150 | 2.0 |            700-150 |
+|  710 | 150 | 2.0 |            710-150 |
+|  800 | 150 | 2.0 |            800-150 |
+|  900 | 150 | 2.0 |            900-150 |
+| 1000 | 150 | 2.0 |           1000-150 |
+| 1200 | 150 | 2.0 |           1200-150 |
+| 1250 | 150 | 2.0 |           1250-150 |
+#+TBLFM: $4='(concat $1 "-" $2)
+
+
+* flexible dictionary
+#+tblname: flexible_dict
+  | description        |           |   |        |
+  | diameter           | R@S0      | 0 | 0.0005 |
+  | L                  | L@S1      | 1 |  0.001 |
+  | configuration_name | 0-1       |   |        |
+
+* apply flexible dimensions
+#+name: flexible_add
+#+header: :var dim =flexible_dimensions
+#+header: :var fdict =flexible_dict
+#+begin_src python :session Python :results table :tangle yes :async
+  Model = sw.ActiveDoc
+  for i in dim:
+      conf = i[3]
+      change_dimensions_from_configuration_name(Model,conf,fdict)
+#+end_src
+
+#+RESULTS: flexible_add
+| 4 |
+
+
+
+
